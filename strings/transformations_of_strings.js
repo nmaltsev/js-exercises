@@ -7,3 +7,18 @@ function numberFormat(number){
 	}
 	return buf;
 };
+
+// Generate string from alpahbet symbols
+// 		randomName(20) return "ivibmdpddpnidspsohdd"
+// @param {Int} count - number of chars
+// @param {String} out - string from alphabet symbols
+function randomName(count){
+	var 	n = count,
+			out = '';
+
+	while(n-- > 0){
+		out += (10 + ~~(Math.random() * 25)).toString(36); 
+	}
+
+	return out;
+}
