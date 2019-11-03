@@ -33,3 +33,5 @@ function splitSort(start, count, array){
 		splitSort(valuePos + 1, count, array);
 	}
 }
+
+module.exports = splitSort;
