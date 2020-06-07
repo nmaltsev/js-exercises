@@ -13,10 +13,10 @@ function numberFormat(number){
 // @param {Int} count - number of chars
 // @param {String} out - string from alphabet symbols
 function randomName(count){
-	var 	n = count,
-			out = '';
+	var n = count;
+	var out = '';
 
-	while(n-- > 0){
+	while(n-- > 0) {
 		out += (10 + ~~(Math.random() * 25)).toString(36); 
 	}
 
