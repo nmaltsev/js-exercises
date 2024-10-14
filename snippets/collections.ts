@@ -41,3 +41,46 @@ export function findPattern(obj: any, pattern: string): boolean {
         return true;
     return false;
 }
+
+export function batchPatch(source: any, values: Record<string, string|number>): any {
+    for (let key in values) {
+        if (!values.hasOwnProperty(key)) continue;
+        dset(source, key, values[key])
+    }
+    return source;
+}
+
+export function dget(obj: any, key: string, _default: any = undefined): any {
+	if (!~key.indexOf('.')) return obj.hasOwnProperty(key) ? obj[key] : _default;
+
+	let 	keys = key.split('.'),
+			i = -1, 
+			len = keys.length, 
+			ref = obj;
+
+	while (i++, i < len) {
+		ref = ref[keys[i]];
+
+		if (ref == undefined) break;
+	}
+	return ref;
+};
+
+export function dset(obj: any, name:string, value: any): void {
+	if (!~name.indexOf('.')) obj[name] = value;
+    
+    let 	prev,
+            parts = name.split('.'),
+            root = obj,
+            len = parts.length,
+            seg;
+            
+    for(let i = 0; seg = parts[i], i < len - 1; i++){
+        if (!root[seg]){
+            root[seg] = {};
+        }
+        root = root[seg];
+    }
+    prev = root[seg];
+    root[seg] = value;
+};
