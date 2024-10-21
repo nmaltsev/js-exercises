@@ -14,18 +14,39 @@
  		<style>
  		.layout {
  			display: grid;
- 			grid-template-rows: 1f 1fr min-content;
- 			grid-template-columns: 1f 1fr;
+ 			grid-template-rows: 1fr 1fr min-content;
+ 			grid-template-columns: 1fr 1fr;
  			grid-gap: 1rem;
  			width: 100%;
  			height: 100vh;
  		}
+		.layout-results {
+			grid-row: span 2;
+			background-color: #fff;
+			margin: 0;
+		}
+		.layout textarea {
+			width: 100%;
+			height: 100%;
+			background-color: #fff;
+			resize: none;
+			color: #333;
+			padding: 1rem;
+			box-sizing: border-box;
+		}
+		.layout-footers {
+			grid-column: 1 / -1;
+		}
  		</style>   
-    	<form class="layout">
-    		<teaxtarea placeholder="json"></textarea>
-    		<pre></pre>
-    		<teaxtarea placeholder="updates"></textarea>
+    	<form class="layout" id="form">
     		<div>
+				<textarea name="json" id="json" placeholder="json"></textarea>
+			</div>
+    		<pre class="layout-results" id="results"></pre>
+			<div>
+				<textarea name="updates" id="updates" placeholder="updates" ></textarea>
+			</div>
+    		<div class="layout-footers">
     			<button type="submit">Submit</button>
     		</div>
     	</form>
