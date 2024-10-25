@@ -57,3 +57,8 @@ _.merge(object, other);
    ]
 }
 ```
+
+## Deepmerge
+[NPM deepmerge package](https://www.npmjs.com/package/deepmerge)
+My implementation of the algorithm merges arrays differently than the deepmerge package from NPM.
+
