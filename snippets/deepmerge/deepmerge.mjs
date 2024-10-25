@@ -16,19 +16,34 @@ export function deepmerge(obj, update) {
                 obj.push(rest);
             } else {
                 while(j-- > 0) {
+                    // TODO check if the object is read only
+                    if (items[j].hasOwnProperty('$$typeof')) {
+                        items[j] = update[key];
+                        continue;
+                    }
                     deepmerge(items[j], update[key]);
                 }
             }
         }
     } else if (typeof(update) == 'object') {
         for(let key in update) {
-            if (typeof(update[key]) == 'object' && typeof(obj[key]) == 'object') {
+            if (typeof((update)[key]) == 'object' && typeof((obj)[key]) == 'object') {
+                // TODO check if the object is read only
+                // @ts-ignore
+                if (obj[key].hasOwnProperty('$$typeof')) {
+                    // @ts-ignore
+                    obj[key] = update[key];
+                    continue;                  
+                }
+                // @ts-ignore
                 deepmerge(obj[key], update[key])
             } else {
+                // @ts-ignore
                 obj[key] = update[key]
             }
         }
     }
+    return obj;
 }
 /**
  * Checks if objects are close to each other
@@ -65,5 +80,9 @@ function getArrayIntersection(array1, array2){
 }
 
 export function clone(obj) {
+    if (typeof structuredClone === 'function') {
+        return structuredClone(obj);
+    }
+    
     return JSON.parse(JSON.stringify(obj))
 }
